@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="dg_edging132" tilewidth="32" tileheight="32">
+  <image source="../tilesets/dg_edging132.gif" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="dg_edging232" tilewidth="32" tileheight="32">
+  <image source="../tilesets/dg_edging232.gif" width="256" height="544"/>
+ </tileset>
+ <tileset firstgid="265" name="dg_edging332" tilewidth="32" tileheight="32">
+  <image source="../tilesets/dg_edging332.gif" width="256" height="416"/>
+ </tileset>
+ <layer name="water" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwrYmBgKBrFo3gUj+JRPIpH8ZDGALhp3qk=
+  </data>
+ </layer>
+ <layer name="land" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztkssKwkAMRUfppioVLCgt/VL/VnFlV9aV6MI7kEAMmdpHlg0cmEW4JwkTwvxagTWROeRZ2SW4gBs4OLtyyr6CJ+jozS4PT3S8QAvOgo48O9U/5aYV2BqeO/goR8wvRc+Ym7LnQdlvyt+ARvTl4XdX6Rri4Ztxdq3y5SwxtwD7kR6eUc+e6juCk7FP3+2qxOxWH++SQv+TKcXzpFweDumyPJ6OWNZf83boXf79mTmeOgz7M0stJesLgdIsmg==
+  </data>
+ </layer>
+ <layer name="trees" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaIJxxaJqNDhqAWIGR9nZKEDA/jBE7m1gAcj8THcNtsIFAqN/JCTtcANkskPmBNA5fWpsPAzB/5dHYfBiYCMST6GTXKBgFgwEAAKVpB1g=
+  </data>
+ </layer>
+</map>
