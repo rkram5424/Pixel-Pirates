@@ -100,6 +100,12 @@ module.exports = Menu;
 function Play() {}
 Play.prototype = {
   create: function() {
+    // Music
+    this.music = this.game.add.audio('pirate',1,true);
+    this.music.volume = 0.4;
+    // Load music
+    //this.music.play('');
+
     // Set stage background color
     this.map = this.game.add.tilemap('map1');
     this.map.addTilesetImage('dg_edging132', 'dg_edging132');
@@ -149,11 +155,12 @@ Play.prototype = {
     // This is only necessary because this is an HTML5 game. Games on other
     // platforms may not need code like this.
     this.game.input.keyboard.addKeyCapture([
+        Phaser.Keyboard.W,
+        Phaser.Keyboard.A,
+        Phaser.Keyboard.S,
+        Phaser.Keyboard.D,
         Phaser.Keyboard.LEFT,
-        Phaser.Keyboard.RIGHT,
-        Phaser.Keyboard.UP,
-        Phaser.Keyboard.DOWN,
-        Phaser.Keyboard.Z
+        Phaser.Keyboard.RIGHT
     ]);
 
     // Cannonball physics
@@ -205,10 +212,15 @@ Play.prototype = {
       this.ship.frame = 1;
     }
     // Fire listener
-    if (this.input.keyboard.isDown(Phaser.Keyboard.Z))
+    if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
         //  Boom!
-        this.fire();
+        this.fire('L');
+    }
+    if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    {
+        //  Boom!
+        this.fire('R');
     }
   },
   // This function should return true when the player activates the "go left" control
@@ -217,7 +229,7 @@ Play.prototype = {
   leftInputIsActive: function() {
     var isActive = false;
 
-    isActive = this.input.keyboard.isDown(Phaser.Keyboard.LEFT);
+    isActive = this.input.keyboard.isDown(Phaser.Keyboard.A);
     isActive |= (this.game.input.activePointer.isDown &&
         this.game.input.activePointer.x < this.game.width/4);
 
@@ -230,7 +242,7 @@ Play.prototype = {
   rightInputIsActive: function() {
     var isActive = false;
 
-    isActive = this.input.keyboard.isDown(Phaser.Keyboard.RIGHT);
+    isActive = this.input.keyboard.isDown(Phaser.Keyboard.D);
     isActive |= (this.game.input.activePointer.isDown &&
         this.game.input.activePointer.x > this.game.width/2 + this.game.width/4);
 
@@ -243,7 +255,7 @@ Play.prototype = {
   upInputIsActive: function() {
     var isActive = false;
 
-    isActive = this.input.keyboard.isDown(Phaser.Keyboard.UP);
+    isActive = this.input.keyboard.isDown(Phaser.Keyboard.W);
     isActive |= (this.game.input.activePointer.isDown &&
         this.game.input.activePointer.x > this.game.width/4 &&
         this.game.input.activePointer.x < this.game.width/2 + this.game.width/4);
@@ -252,13 +264,20 @@ Play.prototype = {
   },
 
   // This function will fire the cannons!
-  fire: function() {
+  fire: function(left_right) {
+    var angle = 0;
+    if (left_right == 'L'){
+      angle = -90;
+    }
+    else{
+      angle = 90;
+    }
     if (this.game.time.now > this.nextFire && this.cannonballs.countDead() > 0){
       this.nextFire = this.game.time.now + this.fireRate;
       var cannonball = this.cannonballs.getFirstExists(false);
       cannonball.reset(this.ship.x, this.ship.y);
-      cannonball.rotation = this.ship.rotation - 90;
-      this.game.physics.arcade.velocityFromRotation(this.ship.rotation - 1.45, 400, cannonball.body.velocity);
+      cannonball.rotation = this.ship.rotation + angle;
+      this.game.physics.arcade.velocityFromRotation(this.ship.rotation + angle, 400, cannonball.body.velocity);
     }
   }
 };
@@ -285,6 +304,8 @@ Preload.prototype = {
     this.load.image('dg_edging232', 'assets/tilesets/dg_edging232.gif');
     this.load.image('dg_edging332', 'assets/tilesets/dg_edging332.gif');
     this.load.image('cannonballs', 'assets/cannonballs.png');
+
+    this.load.audio('pirate', ['assets/audio/music/You_Are_a_Pirate.ogg']);
   },
   create: function() {
     this.asset.cropEnabled = false;

@@ -18,6 +18,8 @@ Preload.prototype = {
     this.load.image('dg_edging232', 'assets/tilesets/dg_edging232.gif');
     this.load.image('dg_edging332', 'assets/tilesets/dg_edging332.gif');
     this.load.image('cannonballs', 'assets/cannonballs.png');
+
+    this.load.audio('pirate', ['assets/audio/music/You_Are_a_Pirate.ogg']);
   },
   create: function() {
     this.asset.cropEnabled = false;
